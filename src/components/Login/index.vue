@@ -1,50 +1,30 @@
 <template>
-  <v-card
-    class="d-inline-block mx-auto card-verticale-center"
-    width="25%"
-    outlined
-    shaped
-  >
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="name"
-        :rules="nameRules"
-        label="Name"
-        required
-      ></v-text-field>
-
+  <v-card class="d-inline-block mx-auto card-verticale-center" outlined>
+    <v-img
+      src="http://www.kpha-ky.org/portals/72/NEON/Member-Login-Button.png"
+      height="50px"
+    >
+    </v-img>
+    <v-form class="login-form" ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="email"
         :rules="emailRules"
-        label="E-mail"
+        label="E-mail Or Username"
         required
+        prepend-inner-icon="mdi-account"
       ></v-text-field>
 
-      <v-select
-        v-model="select"
-        :items="items"
-        :rules="[v => !!v || 'Item is required']"
-        label="Item"
+      <v-text-field
+        v-model="pass"
+        :rules="passRules"
+        label="Password"
         required
-      ></v-select>
+        type="password"
+        prepend-inner-icon="mdi-lock"
+      ></v-text-field>
 
-      <v-checkbox
-        v-model="checkbox"
-        :rules="[v => !!v || 'You must agree to continue!']"
-        label="Do you agree?"
-        required
-      ></v-checkbox>
-
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-        Validate
-      </v-btn>
-
-      <v-btn color="error" class="mr-4" @click="reset">
-        Reset Form
-      </v-btn>
-
-      <v-btn color="warning" @click="resetValidation">
-        Reset Validation
+      <v-btn :disabled="!valid" color="purple" class="btn" @click="login" outlined>
+        Login
       </v-btn>
     </v-form>
   </v-card>
@@ -54,32 +34,18 @@
 export default {
   data: () => ({
     valid: true,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
+    pass: "",
+    passRules: [v => !!v || "Password is required"],
     email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false
+    emailRules: [v => !!v || "E-mail is required"]
   }),
 
   methods: {
-    validate() {
+    login() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+        alert("login successfull");
       }
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
     }
   }
 };
@@ -87,6 +53,17 @@ export default {
 
 <style scoped>
 .card-verticale-center {
-  margin-top: 10%;
+  padding: 10px;
+  margin: auto;
+  width: 280px;
+  height: 280px;
+}
+.btn {
+  margin-top: 10px;
+  float: right;
+  width: 100%;
+}
+.login-form {
+  margin-top: 25px;
 }
 </style>
