@@ -1,16 +1,17 @@
 <template>
-  <v-app-bar id="app-bar" app dense flat>
+  <v-app-bar id="app-bar" app flat class="d-inline-block">
     <v-app-bar-nav-icon id="nav-icon" @click="check" />
     <v-toolbar-title>Application</v-toolbar-title>
-    <v-spacer></v-spacer>
-
-    <v-btn icon>
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
-
-    <v-btn icon>
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>
+    <v-spacer />
+    <v-select
+      class="selec"
+      v-model="locale"
+      :items="locales"
+      prepend-icon="mdi-flag-checkered"
+      dense
+      flat
+      auto
+    ></v-select>
 
     <v-btn to="/login" icon>
       <v-icon>mdi-login</v-icon>
@@ -19,35 +20,26 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      drawer: true
+      locale: "English",
+      locales: ["English", "日本語"]
     };
+  },
+  computed: {
+    ...mapGetters(["drawerStat"])
   },
   methods: {
     check() {
-      this.drawer = !this.drawer;
-      this.$root.$emit("drawer", this.drawer);
-    },
-    deviceSizeCheck() {
-      return screen.availWidth;
+      this.$store.dispatch("toggleSideBar", !this.drawerStat);
     }
-  },
-  beforeMount() {
-    if (this.deviceSizeCheck() <= 1024) {
-      this.drawer = false;
-    }
-  },
-  mounted() {
-    this.$root.$on("navFocusOut", arg => {
-      this.drawer = arg;
-    });
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #app-bar {
   background-color: transparent;
 }
@@ -61,6 +53,22 @@ export default {
 @media (max-width: 1024px) {
   #nav-icon {
     display: block;
+  }
+}
+
+.selec {
+  width: 100%;
+  margin: 0px;
+}
+.card {
+  width: 10%;
+  padding-top: 0px;
+  margin-top: 10px;
+}
+@media (max-width: 1024px) {
+  .card {
+    width: 10px;
+    font-size: 2%;
   }
 }
 </style>

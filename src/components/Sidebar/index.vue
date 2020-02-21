@@ -1,12 +1,6 @@
 <template>
   <v-card style="max-height:100%" class="overflow-auto">
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      dark
-      v-on:input="inputCheck"
-      v-on:transitionend="transEnd"
-    >
+    <v-navigation-drawer v-model="drawerStat" app dark>
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
@@ -110,10 +104,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      drawer: true,
       items: [
         {
           title: "Dashboard",
@@ -122,15 +116,21 @@ export default {
         { title: "Photos", icon: "mdi-image" },
         { title: "About", icon: "mdi-help-box" }
       ]
-      //   color: "primary",
-      //   colors: ["primary", "blue", "success", "red", "teal"],
-      //   right: true,
-      //   miniVariant: false,
-      //   expandOnHover: false,
-      //   background: false
     };
   },
   computed: {
+    ...mapGetters({
+      drawerStats: "drawerStat"
+    }),
+    drawerStat: {
+      get() {
+        return this.drawerStats;
+      },
+      set(newDrawStat) {
+        this.toggleSideBar(newDrawStat);
+        return newDrawStat;
+      }
+    },
     bg() {
       return this.background
         ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
@@ -138,23 +138,12 @@ export default {
     }
   },
   methods: {
-    inputCheck(val) {
-      this.$root.$emit("navFocusOut", val);
-    },
-    transEnd() {},
-    deviceSizeCheck() {
-      return screen.availWidth;
-    }
+    ...mapActions(["toggleSideBar"])
   },
   created() {
-    if (this.deviceSizeCheck() <= 1024) {
-      this.drawer = false;
+    if (screen.availWidth <= 1024) {
+      this.toggleSideBar(false);
     }
-  },
-  mounted() {
-    this.$root.$on("drawer", arg => {
-      this.drawer = arg;
-    });
   }
 };
 </script>

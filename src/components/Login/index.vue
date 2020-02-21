@@ -1,8 +1,8 @@
 <template>
-  <v-card class="d-inline-block mx-auto card-verticale-center" outlined>
+  <v-card class="d-inline-block mx-auto card-verticale-center" outlined raised>
     <v-img
       src="http://www.kpha-ky.org/portals/72/NEON/Member-Login-Button.png"
-      height="50px"
+      height="100px"
     >
     </v-img>
     <v-form class="login-form" ref="form" v-model="valid" lazy-validation>
@@ -11,6 +11,7 @@
         :rules="emailRules"
         label="E-mail Or Username"
         required
+        outlined
         prepend-inner-icon="mdi-account"
       ></v-text-field>
 
@@ -20,10 +21,17 @@
         label="Password"
         required
         type="password"
+        outlined
         prepend-inner-icon="mdi-lock"
       ></v-text-field>
 
-      <v-btn :disabled="!valid" color="purple" class="btn" @click="login" outlined>
+      <v-btn
+        :disabled="!valid"
+        color="purple"
+        class="btn"
+        @click="login"
+        outlined
+      >
         Login
       </v-btn>
     </v-form>
@@ -55,8 +63,6 @@ export default {
 .card-verticale-center {
   padding: 10px;
   margin: auto;
-  width: 280px;
-  height: 280px;
 }
 .btn {
   margin-top: 10px;
