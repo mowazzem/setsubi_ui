@@ -83,7 +83,15 @@
 
 <script>
 export default {
+  import {mapGetters} from 'vuex'
+  computed:{
+    ...mapGetters(["getFile"])
+  },
   name: "HelloWorld",
+  mounted(){
+    console.log(this.getFile)
+
+  },
 
   data: () => ({
     ecosystem: [

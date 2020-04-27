@@ -1,3 +1,19 @@
 {
-  "message": "hello i18n !!"
+  "message": "hello i18n !!",
+  "iot_card":{
+      "current":"current",
+      "temperature":"temperature",
+      "humidity":"humidity",
+      "last_updated":"Last Updated"
+  },
+  "setsubi_data":{
+      "actions":"Actions",
+      "item_name":"Item Name",
+      "tag_no":"Tag No",
+      "model":"Model",
+      "serial_number":"Serial Number",
+      "date_of_menufec":"Date of Menufecture",
+      "drawing_no":"Drawing Number",
+      "drawing_version":"Drawing Version"
+  }
 }

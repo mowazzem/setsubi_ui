@@ -1,6 +1,6 @@
 const app = {
   state: {
-    drawer: true
+    drawer:false
   },
   mutations: {
     toggleSideBar: (state, status) => {

@@ -1,3 +1,19 @@
 {
-    "message":"こんにちは"
+    "message":"こんにちは",
+  "iot_card":{
+      "current":"今の",
+      "temperature":"温度",
+      "humidity":"湿度",
+      "last_updated":"新しい"
+  },
+  "setsubi_data":{
+      "details":"細部",
+      "item_name":"項目名",
+      "tag_no":"タグ番号",
+      "model":"型番",
+      "serial_number":"シリアルナンバー",
+      "date_of_menufec":"製造日e",
+      "drawing_no":"図面番号",
+      "drawing_version":"図面バージョン"
+  }
 }
